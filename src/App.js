@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ClipLoader } from "react-spinners"; // Import the spinner component
+import AOS from "aos"; // Import AOS
+import "aos/dist/aos.css"; // Import AOS styles
 
 const App = () => {
   const [launches, setLaunches] = useState([]); // Stores fetched launches
@@ -10,6 +12,11 @@ const App = () => {
   const [page, setPage] = useState(0); // Current page for infinite scroll
   const [visibleDescriptions, setVisibleDescriptions] = useState({}); // Visibility state for descriptions
   const limit = 10; // Items per page
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Duration for animations
+  }, []);
 
   // Fetch launches
   const fetchLaunches = useCallback(async () => {
@@ -119,7 +126,11 @@ const App = () => {
 
       {/* Launch Cards */}
       {launches.map((launch, index) => (
-        <div className="card mb-3 shadow" key={launch.flight_number}>
+        <div
+          className="card mb-3 shadow"
+          key={launch.flight_number}
+          data-aos="fade" // Add AOS fade animation
+        >
           <div className="card-body d-flex align-items-start">
             <div>
               <div className="d-flex gap-1 align-items-start">
@@ -143,7 +154,7 @@ const App = () => {
 
               {visibleDescriptions[`${launch.flight_number}-${index}`] && (
                 <>
-                  <div className="mb-2 d-flex gap-1">
+                  <div className="mb-2 d-flex gap-1" data-aos="fade">
                     <p className="text-muted mb-2">
                       {timeAgo(launch.launch_date_utc)}
                     </p>
@@ -175,7 +186,7 @@ const App = () => {
                     )}
                   </div>
 
-                  <div className="d-flex gap-2 mb-3">
+                  <div className="d-flex gap-2 mb-3" data-aos="fade">
                     <img
                       src={
                         launch.links.mission_patch_small ||
