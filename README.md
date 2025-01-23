@@ -16,12 +16,12 @@ Follow these steps to set up the project:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/dyjudealexis/web-admin-philtrust-bank.git
+   git clone https://github.com/dyjudealexis/code-test-react.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd web-admin-philtrust-bank
+   cd code-test-react
    ```
 
 3. Install the required dependencies:
